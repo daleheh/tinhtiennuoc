@@ -1,25 +1,86 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.7.34031.279
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatLT_M1", "DatLT_M1\DatLT_M1.csproj", "{E9690259-993F-420A-8933-313F5F0395AB}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E9690259-993F-420A-8933-313F5F0395AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9690259-993F-420A-8933-313F5F0395AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9690259-993F-420A-8933-313F5F0395AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9690259-993F-420A-8933-313F5F0395AB}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7FF4B67C-7A16-405D-9864-21846404C460}
-	EndGlobalSection
-EndGlobal
+using System;
+
+namespace DATLT;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter customer name:");
+        string customerName = Console.ReadLine();
+
+        Console.WriteLine("Enter last month's water meter readings:");
+        double lastMonthReadings = double.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter this month's water meter readings:");
+        double thisMonthReadings = double.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter number of people in the household:");
+        int numberOfPeople = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter type of customer (Household, Administrative agency,public services, Production units, Business services):");
+•	       string customerType = Console.ReadLine();
+
+        double pricePerM3 = 0;
+        double environmentProtectionFees = 0;
+        if (thisMonthReadings >= lastMonthReadings)
+        {
+
+            if (customerType == "Household")
+            {
+                if (numberOfPeople <= 10)
+                {
+                    pricePerM3 = 5.973;
+                    environmentProtectionFees = 597.30;
+                }
+                else if (numberOfPeople <= 20)
+                {
+                    pricePerM3 = 7.052;
+                    environmentProtectionFees = 705.20;
+                }
+                else if (numberOfPeople <= 30)
+                {
+                    pricePerM3 = 8.699;
+                    environmentProtectionFees = 866.90;
+                }
+                else
+ 	          {
+                    pricePerM3 = 15.929;
+                    environmentProtectionFees = 1592.90;
+                }
+            }
+            else if (customerType == "Administrative agency, public services")
+            {
+                pricePerM3 = 9.955;
+                environmentProtectionFees = 995.50;
+            }
+            else if (customerType == "Production units")
+            {
+                pricePerM3 = 11.615;
+                environmentProtectionFees = 1161.50;
+            }
+            else if (customerType == "Business services")
+            {
+                pricePerM3 = 22.068;
+                environmentProtectionFees = 2206.80;
+            }
+            double consumptionAmount = thisMonthReadings - lastMonthReadings;
+
+            double totalWaterBill = consumptionAmount * pricePerM3 environmentProtectionFees;
+
+            Console.WriteLine($"Customer name: {customerName}");
+            Console.WriteLine($"Last month's water meter readings: {lastMonthReadings}");
+            Console.WriteLine($"This month's water meter readings: {thisMonthReadings}");
+            Console.WriteLine($"Amount of consumption: {consumptionAmount}");
+            Console.WriteLine($"Total water bill: {totalWaterBill}");
+
+        }
+        else
+
+        {
+
+            Console.WriteLine("Please re-enter correct readings");
+
+        }
+    }
+}
